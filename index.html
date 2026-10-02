@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Meu Livro de Tarefas</title>
+    <link rel="stylesheet" href="style.css">
+    <!-- Font Awesome para os ícones antigos -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+    <div class="cartao-aplicacao">
+        <header class="cabecalho-aplicacao">
+            <h1>Crônicas do Dia</h1>
+            <button class="botao-icone" id="botao-alternar-tema" title="Alternar Iluminação">
+                <i class="fa-solid fa-feather"></i> <!-- Troquei a lua por uma pena de escrever, mas o ID continua o mesmo para o seu JS -->
+            </button>
+        </header>
+        
+        <div class="caixa-entrada">
+            <input type="text" id="campo-tarefa" placeholder="Escreva um novo feito..." maxlength="40">
+            <button class="botao-principal" id="botao-adicionar">
+                <i class="fa-solid fa-plus"></i> Inserir
+            </button>
+        </div>
+        
+        <ul class="lista-tarefas" id="lista-tarefas">
+            <!-- Exemplo de como o JavaScript deve renderizar cada item para encaixar no estilo:
+            <li class="item-tarefa">
+                <span>Estudar alquimia e CSS</span>
+                <div class="acoes-tarefa">
+                    <button class="botao-acao concluir"><i class="fa-solid fa-check"></i></button>
+                    <button class="botao-acao excluir"><i class="fa-solid fa-trash-can"></i></button>
+                </div>
+            </li> 
+            -->
+        </ul>
+        
+        <footer class="rodape-aplicacao">
+            <span id="contador-tarefas">0 registros no tomo</span>
+        </footer>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>

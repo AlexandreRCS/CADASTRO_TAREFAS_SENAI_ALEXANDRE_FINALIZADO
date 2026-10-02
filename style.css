@@ -1,0 +1,220 @@
+/* Variáveis CSS - Temática de Livro Antigo / Sépia */
+:root {
+    --gradiente-fundo: linear-gradient(135deg, #2c1d11 0%, #170f0a 100%);
+    --fundo-cartao: #f4ecd8; 
+    --cor-texto: #3e2723; 
+    --cor-primaria: #8d2323; 
+    --cor-primaria-destaque: #5c1111;
+    --cor-borda: #d7ccc8; 
+    --cor-perigo: #b71c1c;
+    --cor-concluido: #8d8078; 
+}
+
+body.modo-escuro {
+    --gradiente-fundo: linear-gradient(135deg, #120e0b 0%, #050403 100%);
+    --fundo-cartao: #2a2018; 
+    --cor-texto: #e5d4c0; 
+    --cor-borda: #4e3629;
+    --cor-primaria: #d4a373; 
+    --cor-primaria-destaque: #b58453;
+}
+
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+    font-family: 'Georgia', 'Times New Roman', Times, serif;
+    transition: background 0.3s, color 0.3s;
+}
+
+body {
+    background: var(--gradiente-fundo);
+    min-height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 20px;
+}
+
+.cartao-aplicacao {
+    background: var(--fundo-cartao);
+    color: var(--cor-texto);
+    width: 100%;
+    max-width: 440px;
+    border-radius: 4px; 
+    padding: 35px;
+    border: 4px double var(--cor-texto);
+    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.5), inset 0 0 40px rgba(0, 0, 0, 0.05);
+}
+
+.cabecalho-aplicacao {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 25px;
+    border-bottom: 1px dashed var(--cor-texto);
+    padding-bottom: 10px;
+}
+
+.cabecalho-aplicacao h1 {
+    font-size: 1.6rem;
+    font-weight: 700;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    font-variant: small-caps;
+}
+
+.botao-icone {
+    background: transparent;
+    border: none;
+    font-size: 1.3rem;
+    color: var(--cor-texto);
+    cursor: pointer;
+    opacity: 0.8;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.botao-icone:hover {
+    opacity: 1;
+}
+
+.caixa-entrada {
+    display: flex;
+    gap: 10px;
+    margin-bottom: 25px;
+}
+
+input[type="text"] {
+    flex: 1;
+    padding: 12px;
+    border: 1px solid var(--cor-texto);
+    border-radius: 0; 
+    outline: none;
+    font-size: 1rem;
+    font-style: italic; 
+    background: rgba(0, 0, 0, 0.02);
+    color: var(--cor-texto);
+}
+
+input[type="text"]:focus {
+    border-width: 2px;
+    background: rgba(0, 0, 0, 0.04);
+}
+
+.botao-principal {
+    background: var(--cor-primaria);
+    color: #f4ecd8;
+    border: 1px solid var(--cor-texto);
+    border-radius: 0;
+    padding: 12px 20px;
+    font-weight: 600;
+    text-transform: uppercase;
+    font-size: 0.85rem;
+    letter-spacing: 1px;
+    cursor: pointer;
+    box-shadow: 2px 2px 0px var(--cor-texto);
+    display: flex;
+    align-items: center;
+    gap: 8px; /* Espaço entre o ícone + e o texto Adicionar */
+    transition: all 0.2s ease;
+}
+
+.botao-principal:hover {
+    background: var(--cor-primaria-destaque);
+    transform: translate(-1px, -1px);
+    box-shadow: 3px 3px 0px var(--cor-texto);
+}
+
+.botao-principal:active {
+    transform: translate(1px, 1px);
+    box-shadow: 1px 1px 0px var(--cor-texto);
+}
+
+.lista-tarefas {
+    list-style: none;
+    max-height: 300px;
+    overflow-y: auto;
+    padding-right: 5px;
+}
+
+.lista-tarefas::-webkit-scrollbar {
+    width: 6px;
+}
+.lista-tarefas::-webkit-scrollbar-thumb {
+    background: var(--cor-texto);
+}
+
+.item-tarefa {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 12px 5px;
+    background: transparent;
+    border-bottom: 1px solid var(--cor-borda);
+    margin-bottom: 5px;
+    animation: aparecer 0.4s ease forwards;
+}
+
+.item-tarefa span {
+    font-size: 1.05rem;
+}
+
+.item-tarefa.concluido span {
+    text-decoration: line-through;
+    color: var(--cor-concluido);
+    font-style: italic;
+    opacity: 0.7;
+}
+
+.acoes-tarefa {
+    display: flex;
+    gap: 14px;
+}
+
+.botao-acao {
+    background: none;
+    border: none;
+    cursor: pointer;
+    font-size: 1rem;
+    color: var(--cor-texto);
+    opacity: 0.6;
+    transition: all 0.2s;
+    display: flex;
+    align-items: center;
+}
+
+.botao-acao:hover {
+    opacity: 1;
+    transform: scale(1.1);
+}
+
+.botao-acao.concluir:hover {
+    color: #2e7d32; /* Verde antigo para sucesso */
+}
+
+.botao-acao.excluir:hover {
+    color: var(--cor-perigo);
+}
+
+.rodape-aplicacao {
+    margin-top: 25px;
+    font-size: 0.8rem;
+    font-style: italic;
+    color: var(--cor-concluido);
+    text-align: center;
+    border-top: 1px double var(--cor-borda);
+    padding-top: 10px;
+}
+
+@keyframes aparecer {
+    from {
+        opacity: 0;
+        transform: translateY(5px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
