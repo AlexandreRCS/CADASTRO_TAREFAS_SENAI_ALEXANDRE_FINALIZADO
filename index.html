@@ -5,15 +5,20 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Meu Livro de Tarefas</title>
     <link rel="stylesheet" href="style.css">
-    <!-- Font Awesome para os ícones antigos -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- Font Awesome oficial para carregar os ícones de círculo e lixeira -->
+    <link rel="stylesheet" href="https://cloudflare.com">
 </head>
 <body>
     <div class="cartao-aplicacao">
+        <!-- Sua foto de perfil salva como foto2.png -->
+        <div class="moldura-perfil">
+            <img src="foto2.png" alt="Foto de Perfil" class="foto-perfil">
+        </div>
+
         <header class="cabecalho-aplicacao">
             <h1>Crônicas do Dia</h1>
             <button class="botao-icone" id="botao-alternar-tema" title="Alternar Iluminação">
-                <i class="fa-solid fa-feather"></i> <!-- Troquei a lua por uma pena de escrever, mas o ID continua o mesmo para o seu JS -->
+                <i class="fa-solid fa-feather"></i>
             </button>
         </header>
         
@@ -25,15 +30,7 @@
         </div>
         
         <ul class="lista-tarefas" id="lista-tarefas">
-            <!-- Exemplo de como o JavaScript deve renderizar cada item para encaixar no estilo:
-            <li class="item-tarefa">
-                <span>Estudar alquimia e CSS</span>
-                <div class="acoes-tarefa">
-                    <button class="botao-acao concluir"><i class="fa-solid fa-check"></i></button>
-                    <button class="botao-acao excluir"><i class="fa-solid fa-trash-can"></i></button>
-                </div>
-            </li> 
-            -->
+            <!-- Gerado dinamicamente via JS -->
         </ul>
         
         <footer class="rodape-aplicacao">

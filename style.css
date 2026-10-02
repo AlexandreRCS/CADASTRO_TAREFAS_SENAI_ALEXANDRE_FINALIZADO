@@ -47,6 +47,30 @@ body {
     box-shadow: 0 20px 40px rgba(0, 0, 0, 0.5), inset 0 0 40px rgba(0, 0, 0, 0.05);
 }
 
+/* Moldura e foto de perfil */
+.moldura-perfil {
+    display: flex;
+    justify-content: center;
+    margin-bottom: 20px;
+}
+
+.foto-perfil {
+    width: 90px;
+    height: 90px;
+    object-fit: cover;
+    border-radius: 50%; 
+    border: 3px double var(--cor-texto);
+    padding: 3px;
+    background: var(--fundo-cartao);
+    box-shadow: 0 4px 10px rgba(0,0,0,0.15);
+    filter: sepia(0.3) contrast(1.1); 
+    transition: filter 0.3s ease;
+}
+
+.cartao-aplicacao:hover .foto-perfil {
+    filter: sepia(0) contrast(1); 
+}
+
 .cabecalho-aplicacao {
     display: flex;
     justify-content: space-between;
@@ -70,14 +94,9 @@ body {
     font-size: 1.3rem;
     color: var(--cor-texto);
     cursor: pointer;
-    opacity: 0.8;
     display: flex;
     align-items: center;
     justify-content: center;
-}
-
-.botao-icone:hover {
-    opacity: 1;
 }
 
 .caixa-entrada {
@@ -117,7 +136,7 @@ input[type="text"]:focus {
     box-shadow: 2px 2px 0px var(--cor-texto);
     display: flex;
     align-items: center;
-    gap: 8px; /* Espaço entre o ícone + e o texto Adicionar */
+    gap: 8px;
     transition: all 0.2s ease;
 }
 
@@ -125,11 +144,6 @@ input[type="text"]:focus {
     background: var(--cor-primaria-destaque);
     transform: translate(-1px, -1px);
     box-shadow: 3px 3px 0px var(--cor-texto);
-}
-
-.botao-principal:active {
-    transform: translate(1px, 1px);
-    box-shadow: 1px 1px 0px var(--cor-texto);
 }
 
 .lista-tarefas {
@@ -146,6 +160,7 @@ input[type="text"]:focus {
     background: var(--cor-texto);
 }
 
+/* Itens da lista */
 .item-tarefa {
     display: flex;
     align-items: center;
@@ -157,45 +172,53 @@ input[type="text"]:focus {
     animation: aparecer 0.4s ease forwards;
 }
 
+/* CONFIGURAÇÃO DO TEXTO DA TAREFA */
 .item-tarefa span {
     font-size: 1.05rem;
+    color: var(--cor-texto); /* Garante que o texto use a cor marrom do tema */
+    flex: 1;
+    text-align: left;
+    word-break: break-all;
 }
 
+/* Quando estiver concluída */
 .item-tarefa.concluido span {
-    text-decoration: line-through;
-    color: var(--cor-concluido);
+    text-decoration: line-through !important;
+    color: var(--cor-concluido) !important;
     font-style: italic;
-    opacity: 0.7;
+    opacity: 0.6;
 }
 
 .acoes-tarefa {
     display: flex;
     gap: 14px;
-}
-
-.botao-acao {
-    background: none;
-    border: none;
-    cursor: pointer;
-    font-size: 1rem;
-    color: var(--cor-texto);
-    opacity: 0.6;
-    transition: all 0.2s;
-    display: flex;
     align-items: center;
 }
 
+/* Botões de Ação (Concluir e Deletar) */
+.botao-acao {
+    background: transparent !important;
+    border: none !important;
+    cursor: pointer;
+    font-size: 1.1rem;
+    color: var(--cor-texto); /* Garante que os ícones fiquem visíveis */
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    padding: 4px;
+    transition: transform 0.2s, color 0.2s;
+}
+
 .botao-acao:hover {
-    opacity: 1;
-    transform: scale(1.1);
+    transform: scale(1.2);
 }
 
 .botao-acao.concluir:hover {
-    color: #2e7d32; /* Verde antigo para sucesso */
+    color: #2e7d32; /* Verde no hover */
 }
 
 .botao-acao.excluir:hover {
-    color: var(--cor-perigo);
+    color: var(--cor-perigo); /* Vermelho no hover */
 }
 
 .rodape-aplicacao {
@@ -209,12 +232,6 @@ input[type="text"]:focus {
 }
 
 @keyframes aparecer {
-    from {
-        opacity: 0;
-        transform: translateY(5px);
-    }
-    to {
-        opacity: 1;
-        transform: translateY(0);
-    }
+    from { opacity: 0; transform: translateY(5px); }
+    to { opacity: 1; transform: translateY(0); }
 }
