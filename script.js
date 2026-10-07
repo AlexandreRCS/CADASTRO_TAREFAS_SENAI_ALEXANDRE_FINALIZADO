@@ -28,6 +28,7 @@ const listaTarefas = document.getElementById("lista-tarefas");
 const contadorTarefas = document.getElementById("contador-tarefas");
 const botaoAdicionar = document.querySelector(".botao-principal");
 const botaoTema = document.getElementById("botao-alternar-tema");
+const botaoLimparConcluidas = document.getElementById("botao-limpar-concluidas");
 
 function salvarTarefas() {
     const tarefasParaSalvar = listaDeTarefas.map(function (tarefa) {
@@ -78,6 +79,46 @@ campoTarefas.addEventListener("keydown", function (event) {
     }
 });
 
+// NOVA FUNÇÃO 1: Editar o texto de uma tarefa existente
+function editarTarefa(index) {
+    const tarefa = listaDeTarefas[index];
+    const novoTexto = prompt("Reescreva este feito:", tarefa.descricao);
+
+    if (novoTexto !== null) {
+        const textoFormatado = novoTexto.trim();
+        if (textoFormatado === "") {
+            alert("A descrição do feito não pode ficar vazia.");
+        } else {
+            tarefa.descricao = textoFormatado;
+            salvarTarefas();
+            renderizarTarefas();
+        }
+    }
+}
+
+// NOVA FUNÇÃO 2: Limpar apenas as tarefas concluídas
+if (botaoLimparConcluidas) {
+    botaoLimparConcluidas.addEventListener("click", function () {
+        const temConcluidas = listaDeTarefas.some(t => t.concluida);
+        
+        if (!temConcluidas) {
+            alert("Não há feitos concluídos para expurgar.");
+            return;
+        }
+
+        if (confirm("Deseja expurgar todos os feitos já concluídos?")) {
+            // Remove do array mantendo apenas as pendentes
+            for (let i = listaDeTarefas.length - 1; i >= 0; i--) {
+                if (listaDeTarefas[i].concluida) {
+                    listaDeTarefas.splice(i, 1);
+                }
+            }
+            salvarTarefas();
+            renderizarTarefas();
+        }
+    });
+}
+
 function renderizarTarefas() {
     listaTarefas.innerHTML = "";
 
@@ -97,9 +138,10 @@ function renderizarTarefas() {
         const acoes = document.createElement("div");
         acoes.classList.add("acoes-tarefa");
 
-        // Botão Concluir (Com ícones em SVG nativos para nunca sumirem)
+        // Botão Concluir
         const botaoConcluir = document.createElement("button");
         botaoConcluir.classList.add("botao-acao", "concluir");
+        botaoConcluir.title = "Alternar Conclusão";
         if (tarefa.concluida) {
             botaoConcluir.innerHTML = `
                 <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
@@ -119,9 +161,24 @@ function renderizarTarefas() {
             renderizarTarefas();
         });
 
-        // Botão Excluir (Com ícone de lixeira clássica em SVG nativo)
+        // Botão Editar (Ação Nova)
+        const botaoEditar = document.createElement("button");
+        botaoEditar.classList.add("botao-acao", "editar");
+        botaoEditar.title = "Editar Feito";
+        botaoEditar.innerHTML = `
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"></path>
+                <path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z"></path>
+            </svg>`;
+
+        botaoEditar.addEventListener("click", function () {
+            editarTarefa(index);
+        });
+
+        // Botão Excluir
         const botaoExcluir = document.createElement("button");
         botaoExcluir.classList.add("botao-acao", "excluir");
+        botaoExcluir.title = "Excluir Feito";
         botaoExcluir.innerHTML = `
             <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
                 <polyline points="3 6 5 6 21 6"></polyline>
@@ -138,6 +195,7 @@ function renderizarTarefas() {
 
         // Montagem final do item
         acoes.appendChild(botaoConcluir);
+        acoes.appendChild(botaoEditar);
         acoes.appendChild(botaoExcluir);
         
         item.appendChild(texto);

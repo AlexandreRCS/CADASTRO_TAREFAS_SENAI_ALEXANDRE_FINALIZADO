@@ -235,3 +235,33 @@ input[type="text"]:focus {
     from { opacity: 0; transform: translateY(5px); }
     to { opacity: 1; transform: translateY(0); }
 }
+
+/* Estilo para o hover do botão de edição */
+.botao-acao.editar:hover {
+    color: #d97706; /* Cor dourada / âmbar */
+}
+
+/* Ajuste do rodapé para acomodar o botão de expurgar */
+.rodape-aplicacao {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.botao-secundario {
+    background: transparent;
+    border: 1px solid var(--cor-borda);
+    color: var(--cor-texto);
+    font-size: 0.75rem;
+    font-family: inherit;
+    font-style: italic;
+    padding: 4px 8px;
+    cursor: pointer;
+    transition: all 0.2s ease;
+}
+
+.botao-secundario:hover {
+    background: var(--cor-perigo);
+    color: #ffffff;
+    border-color: var(--cor-perigo);
+}
