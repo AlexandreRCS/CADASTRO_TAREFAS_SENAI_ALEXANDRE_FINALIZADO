@@ -79,7 +79,7 @@ campoTarefas.addEventListener("keydown", function (event) {
     }
 });
 
-// NOVA FUNÇÃO 1: Editar o texto de uma tarefa existente
+// FUNÇÃO 1: Editar o texto de uma tarefa existente
 function editarTarefa(index) {
     const tarefa = listaDeTarefas[index];
     const novoTexto = prompt("Reescreva este feito:", tarefa.descricao);
@@ -96,7 +96,7 @@ function editarTarefa(index) {
     }
 }
 
-// NOVA FUNÇÃO 2: Limpar apenas as tarefas concluídas
+// FUNÇÃO 2: Expurgar apenas as tarefas concluídas
 if (botaoLimparConcluidas) {
     botaoLimparConcluidas.addEventListener("click", function () {
         const temConcluidas = listaDeTarefas.some(t => t.concluida);
@@ -107,7 +107,6 @@ if (botaoLimparConcluidas) {
         }
 
         if (confirm("Deseja expurgar todos os feitos já concluídos?")) {
-            // Remove do array mantendo apenas as pendentes
             for (let i = listaDeTarefas.length - 1; i >= 0; i--) {
                 if (listaDeTarefas[i].concluida) {
                     listaDeTarefas.splice(i, 1);
@@ -161,7 +160,7 @@ function renderizarTarefas() {
             renderizarTarefas();
         });
 
-        // Botão Editar (Ação Nova)
+        // Botão Editar
         const botaoEditar = document.createElement("button");
         botaoEditar.classList.add("botao-acao", "editar");
         botaoEditar.title = "Editar Feito";
@@ -217,18 +216,35 @@ function atualizarContador() {
     }
 }
 
-// Alternar o tema mantendo compatibilidade nativa
-botaoTema.addEventListener("click", function () {
-    document.body.classList.toggle("modo-escuro");
-    const icone = botaoTema.querySelector("i");
+// LÓGICA DO MODO ESCURO COM MEMÓRIA (localStorage)
+function aplicarTemaSalvo() {
+    const temaSalvo = localStorage.getItem("tema");
+    const icone = botaoTema ? botaoTema.querySelector("i") : null;
 
-    if (icone) {
-        if (document.body.classList.contains("modo-escuro")) {
-            icone.className = "fa-solid fa-wand-magic-sparkles"; 
-        } else {
-            icone.className = "fa-solid fa-feather"; 
-        }
+    if (temaSalvo === "escuro") {
+        document.body.classList.add("modo-escuro");
+        if (icone) icone.className = "fa-solid fa-wand-magic-sparkles";
+    } else {
+        document.body.classList.remove("modo-escuro");
+        if (icone) icone.className = "fa-solid fa-feather";
     }
-});
+}
 
+if (botaoTema) {
+    botaoTema.addEventListener("click", function () {
+        document.body.classList.toggle("modo-escuro");
+        const icone = botaoTema.querySelector("i");
+
+        if (document.body.classList.contains("modo-escuro")) {
+            localStorage.setItem("tema", "escuro");
+            if (icone) icone.className = "fa-solid fa-wand-magic-sparkles";
+        } else {
+            localStorage.setItem("tema", "claro");
+            if (icone) icone.className = "fa-solid fa-feather";
+        }
+    });
+}
+
+// Inicializações da página
 carregarTarefas();
+aplicarTemaSalvo();

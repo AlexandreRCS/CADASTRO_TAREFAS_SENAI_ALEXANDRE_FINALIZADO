@@ -10,6 +10,7 @@
     --cor-concluido: #8d8078; 
 }
 
+/* Modo Escuro (Pergaminho Noturno) */
 body.modo-escuro {
     --gradiente-fundo: linear-gradient(135deg, #120e0b 0%, #050403 100%);
     --fundo-cartao: #2a2018; 
@@ -17,6 +18,7 @@ body.modo-escuro {
     --cor-borda: #4e3629;
     --cor-primaria: #d4a373; 
     --cor-primaria-destaque: #b58453;
+    --cor-concluido: #8c786a;
 }
 
 * {
@@ -175,7 +177,7 @@ input[type="text"]:focus {
 /* CONFIGURAÇÃO DO TEXTO DA TAREFA */
 .item-tarefa span {
     font-size: 1.05rem;
-    color: var(--cor-texto); /* Garante que o texto use a cor marrom do tema */
+    color: var(--cor-texto);
     flex: 1;
     text-align: left;
     word-break: break-all;
@@ -195,13 +197,13 @@ input[type="text"]:focus {
     align-items: center;
 }
 
-/* Botões de Ação (Concluir e Deletar) */
+/* Botões de Ação (Concluir, Editar e Deletar) */
 .botao-acao {
     background: transparent !important;
     border: none !important;
     cursor: pointer;
     font-size: 1.1rem;
-    color: var(--cor-texto); /* Garante que os ícones fiquem visíveis */
+    color: var(--cor-texto);
     display: inline-flex;
     align-items: center;
     justify-content: center;
@@ -214,11 +216,15 @@ input[type="text"]:focus {
 }
 
 .botao-acao.concluir:hover {
-    color: #2e7d32; /* Verde no hover */
+    color: #2e7d32;
+}
+
+.botao-acao.editar:hover {
+    color: #d97706;
 }
 
 .botao-acao.excluir:hover {
-    color: var(--cor-perigo); /* Vermelho no hover */
+    color: var(--cor-perigo);
 }
 
 .rodape-aplicacao {
@@ -226,26 +232,11 @@ input[type="text"]:focus {
     font-size: 0.8rem;
     font-style: italic;
     color: var(--cor-concluido);
-    text-align: center;
-    border-top: 1px double var(--cor-borda);
-    padding-top: 10px;
-}
-
-@keyframes aparecer {
-    from { opacity: 0; transform: translateY(5px); }
-    to { opacity: 1; transform: translateY(0); }
-}
-
-/* Estilo para o hover do botão de edição */
-.botao-acao.editar:hover {
-    color: #d97706; /* Cor dourada / âmbar */
-}
-
-/* Ajuste do rodapé para acomodar o botão de expurgar */
-.rodape-aplicacao {
     display: flex;
     justify-content: space-between;
     align-items: center;
+    border-top: 1px double var(--cor-borda);
+    padding-top: 10px;
 }
 
 .botao-secundario {
@@ -264,4 +255,9 @@ input[type="text"]:focus {
     background: var(--cor-perigo);
     color: #ffffff;
     border-color: var(--cor-perigo);
+}
+
+@keyframes aparecer {
+    from { opacity: 0; transform: translateY(5px); }
+    to { opacity: 1; transform: translateY(0); }
 }
